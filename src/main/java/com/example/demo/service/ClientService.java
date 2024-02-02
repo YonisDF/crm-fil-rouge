@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.dao.ClientRepository;
 import com.example.demo.model.Client;
+import com.example.demo.model.state.ClientEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,23 +14,25 @@ public class ClientService {
     @Autowired
     private ClientRepository clientRepository;
 
-    public void add(Client client){
+    public void add(Client client) {
+        short intState = (short) ClientEnum.valueOf(client.getState()).ordinal();
+        client.setStateInt(intState);
         clientRepository.save(client);
     }
 
-    public List<Client> getAll(){
+    public List<Client> getAll() {
         return clientRepository.findAll();
     }
 
-    public Optional<Client> findById(Integer id){
+    public Optional<Client> findById(Integer id) {
         return clientRepository.findById(id);
     }
 
-    public void delete(Integer id){
+    public void delete(Integer id) {
         clientRepository.deleteById(id);
     }
 
-    public void update(Client client){
+    public void update(Client client) {
         clientRepository.save(client);
     }
 }

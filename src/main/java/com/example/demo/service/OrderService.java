@@ -13,23 +13,23 @@ public class OrderService {
     @Autowired
     OrderRepository orderRepository;
 
-    public void add(Order order){
+    public void add(Order order) {
         orderRepository.save(order);
     }
 
-    public List<Order> getAll(){
+    public List<Order> getAll() {
         return orderRepository.findAll();
     }
 
-    public Optional<Order> findById(Integer id){
+    public Optional<Order> findById(Integer id) {
         return orderRepository.findById(id);
     }
 
-    public void delete(Integer id){
+    public void delete(Integer id) {
         orderRepository.deleteById(id);
     }
 
-    public void update(Order order){
+    public void update(Order order) {
         orderRepository.save(order);
     }
 }

@@ -1,6 +1,7 @@
 package com.example.demo.model;
 
 import com.example.demo.model.state.ClientEnum;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -22,12 +23,16 @@ public class Client {
     private String zipCode;
     private String city;
     private String country;
-    private short state;
+    @Column(name = "state")
+    @JsonIgnore
+    private short stateInt;
+    @Transient
+    private String state;
 
     public Client() {
     }
 
-    public Client(String company, String firstName, String lastName, String email, String phone, String address, String zipCode, String city, String country, short state) {
+    public Client(String company, String firstName, String lastName, String email, String phone, String address, String zipCode, String city, String country, String state) {
         this.company = company;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -120,15 +125,19 @@ public class Client {
         this.country = country;
     }
 
-    public short getState() {
+    public String getState() {
         return state;
     }
 
-    public ClientEnum getStateEnum() {
-        return ClientEnum.values()[state];
+    public void setState(String state) {
+        this.state = state;
     }
 
-    public void setState(short state) {
-        this.state = state;
+    public short getStateInt() {
+        return stateInt;
+    }
+
+    public void setStateInt(short stateInt) {
+        this.stateInt = stateInt;
     }
 }

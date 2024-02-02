@@ -28,7 +28,7 @@ public class Order {
     public Order() {
     }
 
-    public Order(String presta, String designation, Client client, short days, int price, int totalNoTaxe, int totalTaxe, short state) {
+    public Order(String presta, String designation, Client client, short days, int price, int totalNoTaxe, int totalTaxe) {
         this.presta = presta;
         this.designation = designation;
         this.client = client;
@@ -36,7 +36,6 @@ public class Order {
         this.price = price;
         this.totalNoTaxe = totalNoTaxe;
         this.totalTaxe = totalTaxe;
-        this.state = state;
     }
 
     public Integer getId() {
