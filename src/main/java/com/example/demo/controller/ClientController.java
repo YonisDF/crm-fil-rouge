@@ -1,7 +1,8 @@
 package com.example.demo.controller;
 
+import com.example.demo.controller.dto.ClientDTO;
+import com.example.demo.controller.mapper.ClientMapper;
 import com.example.demo.model.Client;
-import com.example.demo.model.state.ClientEnum;
 import com.example.demo.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,18 +23,18 @@ public class ClientController {
     private ClientService clientService;
 
     @GetMapping("clients")
-    public ResponseEntity<List<ClientDTO>> getClients(){
+    public ResponseEntity<List<ClientDTO>> getClients() {
         List<ClientDTO> listClientDTO = new ArrayList<>();
-        for (Client client : clientService.getAll()){
+        for (Client client : clientService.getAll()) {
             listClientDTO.add(ClientMapper.convertEntityToDTO(client));
         }
         return ResponseEntity.ok(listClientDTO);
     }
 
     @GetMapping("clients/{id}")
-    public ResponseEntity<ClientDTO> getClientById(@PathVariable("id") Integer id){
+    public ResponseEntity<ClientDTO> getClientById(@PathVariable("id") Integer id) {
         Optional<Client> optional = clientService.findById(id);
-        if (optional.isEmpty()){
+        if (optional.isEmpty()) {
             return ResponseEntity.notFound().build();
         } else {
             Client client = optional.get();
@@ -43,10 +44,10 @@ public class ClientController {
     }
 
     @PostMapping("clients")
-    public ResponseEntity<?> addClient(@RequestBody ClientDTO clientDTO){
-        if (isAnyStringBlank(clientDTO.getCompany(),clientDTO.getFirstName(),clientDTO.getLastName(),clientDTO.getEmail(),
-                clientDTO.getPhone(),clientDTO.getAddress(),clientDTO.getZipCode(),clientDTO.getCity(),clientDTO.getCountry(),clientDTO.getState())
-                || !isStringInClientEnum(clientDTO.getState())){
+    public ResponseEntity<?> addClient(@RequestBody ClientDTO clientDTO) {
+        if (isAnyStringBlank(clientDTO.getCompany(), clientDTO.getFirstName(), clientDTO.getLastName(), clientDTO.getEmail(),
+                clientDTO.getPhone(), clientDTO.getAddress(), clientDTO.getZipCode(), clientDTO.getCity(), clientDTO.getCountry(), clientDTO.getState())
+                || !isStringInClientEnum(clientDTO.getState())) {
             return ResponseEntity.badRequest().build();
         } else {
             Client client = ClientMapper.convertDTOtoEntity(clientDTO);
@@ -56,9 +57,9 @@ public class ClientController {
     }
 
     @DeleteMapping("clients/{id}")
-    public ResponseEntity<?> deleteClient(@PathVariable("id") Integer id){
+    public ResponseEntity<?> deleteClient(@PathVariable("id") Integer id) {
         Optional<Client> optional = clientService.findById(id);
-        if (optional.isEmpty()){
+        if (optional.isEmpty()) {
             return ResponseEntity.notFound().build();
         } else {
             clientService.delete(id);
@@ -67,10 +68,14 @@ public class ClientController {
     }
 
     @PutMapping("clients/{id}")
-    public ResponseEntity<?> modifyClient(@PathVariable("id") Integer id, @RequestBody ClientDTO clientDTO){
+    public ResponseEntity<?> modifyClient(@PathVariable("id") Integer id, @RequestBody ClientDTO clientDTO) {
         Optional<Client> optional = clientService.findById(id);
-        if (optional.isEmpty()){
+        if (optional.isEmpty()) {
             return ResponseEntity.notFound().build();
+        } else if (isAnyStringBlank(clientDTO.getCompany(), clientDTO.getFirstName(), clientDTO.getLastName(), clientDTO.getEmail(),
+                clientDTO.getPhone(), clientDTO.getAddress(), clientDTO.getZipCode(), clientDTO.getCity(), clientDTO.getCountry(), clientDTO.getState())
+                || !isStringInClientEnum(clientDTO.getState())) {
+            return ResponseEntity.badRequest().build();
         } else {
             Client client = ClientMapper.convertDTOtoEntity(clientDTO);
             client.setId(id);

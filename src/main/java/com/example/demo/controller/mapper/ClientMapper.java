@@ -1,11 +1,12 @@
-package com.example.demo.controller;
+package com.example.demo.controller.mapper;
 
+import com.example.demo.controller.dto.ClientDTO;
 import com.example.demo.model.Client;
 import com.example.demo.model.state.ClientEnum;
 
 public class ClientMapper {
 
-    public static ClientDTO convertEntityToDTO(Client client){
+    public static ClientDTO convertEntityToDTO(Client client) {
         ClientDTO dto = new ClientDTO();
         dto.setFirstName(client.getFirstName());
         dto.setLastName(client.getLastName());
@@ -22,7 +23,7 @@ public class ClientMapper {
         return dto;
     }
 
-    public static Client convertDTOtoEntity (ClientDTO dto){
+    public static Client convertDTOtoEntity(ClientDTO dto) {
         Client client = new Client();
         client.setFirstName(dto.getFirstName());
         client.setLastName(dto.getLastName());
@@ -34,7 +35,7 @@ public class ClientMapper {
         client.setEmail(dto.getEmail());
         client.setZipCode(dto.getZipCode());
 
-        if (dto.getState()!=null) {
+        if (dto.getState() != null) {
             short intState = (short) ClientEnum.valueOf(dto.getState()).ordinal();
             client.setState(intState);
         }

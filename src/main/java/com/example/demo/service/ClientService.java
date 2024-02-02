@@ -2,7 +2,6 @@ package com.example.demo.service;
 
 import com.example.demo.dao.ClientRepository;
 import com.example.demo.model.Client;
-import com.example.demo.model.state.ClientEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

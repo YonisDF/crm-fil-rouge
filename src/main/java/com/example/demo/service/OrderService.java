@@ -14,6 +14,8 @@ public class OrderService {
     OrderRepository orderRepository;
 
     public void add(Order order) {
+        order.setTotalNoTaxe(order.getNbDays() * order.getUnitPrice());
+        order.setTotalTaxe((int) (order.getTotalNoTaxe() * 1.2));
         orderRepository.save(order);
     }
 
@@ -30,6 +32,8 @@ public class OrderService {
     }
 
     public void update(Order order) {
+        order.setTotalNoTaxe(order.getNbDays() * order.getUnitPrice());
+        order.setTotalTaxe((int) (order.getTotalNoTaxe() * 1.2));
         orderRepository.save(order);
     }
 }

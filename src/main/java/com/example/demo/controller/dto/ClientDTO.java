@@ -1,7 +1,4 @@
-package com.example.demo.controller;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Transient;
+package com.example.demo.controller.dto;
 
 public class ClientDTO {
 

@@ -1,48 +1,18 @@
-package com.example.demo.model;
+package com.example.demo.controller.dto;
 
-import jakarta.persistence.*;
+import com.example.demo.model.Client;
 
-@Entity
-@Table(name = "orders")
-public class Order {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    @Column(name = "type_presta")
+
+public class OrderDTO {
+
     private String typePresta;
     private String designation;
-    @ManyToOne
-    @JoinColumn(name = "client_id")
     private Client client;
-    @Column(name = "nb_days")
     private short nbDays;
-    @Column(name = "unit_price")
     private int unitPrice;
-    @Column(name = "total_exclude_taxe")
     private int totalNoTaxe;
-    @Column(name = "total_with_taxe")
     private int totalTaxe;
-    private short state;
-
-    public Order() {
-    }
-
-    public Order(String typePresta, String designation, Client client, short nbDays, int unitPrice, short state) {
-        this.typePresta = typePresta;
-        this.designation = designation;
-        this.client = client;
-        this.nbDays = nbDays;
-        this.unitPrice = unitPrice;
-        this.state = state;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    private String state;
 
     public String getTypePresta() {
         return typePresta;
@@ -100,11 +70,11 @@ public class Order {
         this.totalTaxe = totalTaxe;
     }
 
-    public short getState() {
+    public String getState() {
         return state;
     }
 
-    public void setState(short state) {
+    public void setState(String state) {
         this.state = state;
     }
 }
