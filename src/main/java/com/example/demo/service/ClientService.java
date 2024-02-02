@@ -15,8 +15,6 @@ public class ClientService {
     private ClientRepository clientRepository;
 
     public void add(Client client) {
-        short intState = (short) ClientEnum.valueOf(client.getState()).ordinal();
-        client.setStateInt(intState);
         clientRepository.save(client);
     }
 

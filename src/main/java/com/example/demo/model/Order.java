@@ -23,12 +23,15 @@ public class Order {
     private int totalNoTaxe;
     @Column(name = "total_with_taxe")
     private int totalTaxe;
-    private short state;
+    @Column(name = "state")
+    private short stateInt;
+    @Transient
+    private String state;
 
     public Order() {
     }
 
-    public Order(String presta, String designation, Client client, short days, int price, int totalNoTaxe, int totalTaxe) {
+    public Order(String presta, String designation, Client client, short days, int price, int totalNoTaxe, int totalTaxe, String state) {
         this.presta = presta;
         this.designation = designation;
         this.client = client;
@@ -36,6 +39,7 @@ public class Order {
         this.price = price;
         this.totalNoTaxe = totalNoTaxe;
         this.totalTaxe = totalTaxe;
+        this.state = state;
     }
 
     public Integer getId() {
@@ -102,15 +106,19 @@ public class Order {
         this.totalTaxe = totalTaxe;
     }
 
-    public short getState() {
+    public String getState() {
         return state;
     }
 
-    public OrderEnum getStateEnum() {
-        return OrderEnum.values()[state];
+    public void setState(String state) {
+        this.state = state;
     }
 
-    public void setState(short state) {
-        this.state = state;
+    public short getStateInt() {
+        return stateInt;
+    }
+
+    public void setStateInt(short stateInt) {
+        this.stateInt = stateInt;
     }
 }

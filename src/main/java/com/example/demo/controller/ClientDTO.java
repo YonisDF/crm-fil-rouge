@@ -1,53 +1,20 @@
-package com.example.demo.model;
+package com.example.demo.controller;
 
-import com.example.demo.model.state.ClientEnum;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Transient;
 
-@Entity
-@Table(name = "clients")
-public class Client {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    @Column(name = "company_name")
+public class ClientDTO {
+
     private String company;
-    @Column(name = "first_name")
     private String firstName;
-    @Column(name = "last_name")
     private String lastName;
     private String email;
     private String phone;
     private String address;
-    @Column(name = "zip_code")
     private String zipCode;
     private String city;
     private String country;
-    private short state;
-
-    public Client() {
-    }
-
-    public Client(String company, String firstName, String lastName, String email, String phone, String address, String zipCode, String city, String country, short state) {
-        this.company = company;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.phone = phone;
-        this.address = address;
-        this.zipCode = zipCode;
-        this.city = city;
-        this.country = country;
-        this.state = state;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    private String state;
 
     public String getCompany() {
         return company;
@@ -121,11 +88,11 @@ public class Client {
         this.country = country;
     }
 
-    public short getState() {
+    public String getState() {
         return state;
     }
 
-    public void setState(short state) {
+    public void setState(String state) {
         this.state = state;
     }
 }
