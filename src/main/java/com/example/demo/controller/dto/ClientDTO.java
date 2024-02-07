@@ -2,7 +2,8 @@ package com.example.demo.controller.dto;
 
 public class ClientDTO {
 
-    private String company;
+    private Integer id;
+    private String companyName;
     private String firstName;
     private String lastName;
     private String email;
@@ -13,12 +14,20 @@ public class ClientDTO {
     private String country;
     private String state;
 
-    public String getCompany() {
-        return company;
+    public Integer getId() {
+        return id;
     }
 
-    public void setCompany(String company) {
-        this.company = company;
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
 
     public String getFirstName() {

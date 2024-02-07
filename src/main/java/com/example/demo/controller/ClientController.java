@@ -45,7 +45,7 @@ public class ClientController {
 
     @PostMapping("clients")
     public ResponseEntity<?> addClient(@RequestBody ClientDTO clientDTO) {
-        if (isAnyStringBlank(clientDTO.getCompany(), clientDTO.getFirstName(), clientDTO.getLastName(), clientDTO.getEmail(),
+        if (isAnyStringBlank(clientDTO.getCompanyName(), clientDTO.getFirstName(), clientDTO.getLastName(), clientDTO.getEmail(),
                 clientDTO.getPhone(), clientDTO.getAddress(), clientDTO.getZipCode(), clientDTO.getCity(), clientDTO.getCountry(), clientDTO.getState())
                 || !isStringInClientEnum(clientDTO.getState())) {
             return ResponseEntity.badRequest().build();
@@ -72,7 +72,7 @@ public class ClientController {
         Optional<Client> optional = clientService.findById(id);
         if (optional.isEmpty()) {
             return ResponseEntity.notFound().build();
-        } else if (isAnyStringBlank(clientDTO.getCompany(), clientDTO.getFirstName(), clientDTO.getLastName(), clientDTO.getEmail(),
+        } else if (isAnyStringBlank(clientDTO.getCompanyName(), clientDTO.getFirstName(), clientDTO.getLastName(), clientDTO.getEmail(),
                 clientDTO.getPhone(), clientDTO.getAddress(), clientDTO.getZipCode(), clientDTO.getCity(), clientDTO.getCountry(), clientDTO.getState())
                 || !isStringInClientEnum(clientDTO.getState())) {
             return ResponseEntity.badRequest().build();
